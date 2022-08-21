@@ -62,7 +62,7 @@
 
 {% endblock content %}
 
-
+{% comment %} 
 {% block domready %}
 
 	var cityform = $("#cityform");
@@ -74,10 +74,10 @@
 	var wt = $("#wt");
 
 	$(cityform).submit(function (e) {
-		{% comment %} e.preventDefault(); {% endcomment %}
+		e.preventDefault();
 		cityname.value = ""
   	cityname.focus()	
-		{% comment %} $.post('{% url 'index' %}', {
+		$.post('{% url 'index' %}', {
 			cityname: $("#id_city_name").val(),
 		},
 		function (data) {
@@ -89,7 +89,7 @@
 				console.log("data errors: " + data.errors.city_name)
 			}
 		} 
-		){% endcomment %}
+		)
 	});
 
-{% endblock domready %}
+{% endblock domready %} {% endcomment %}
