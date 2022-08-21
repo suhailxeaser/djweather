@@ -1,0 +1,39 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>What's the weather like?</title>
+    <link
+      rel="stylesheet"
+      href="http://localhost:8001/static/bulma.css"
+    />
+  </head>
+  <body>
+		{% block content %}{% endblock content %}
+    <footer class="footer">
+			{% block footer %}{% endblock footer %}
+		</footer>
+
+		<script src="http://localhost:8001/static/jquery-3.6.0.min.js"></script>
+		<script src="http://localhost:8001/static/js.cookie.min.js"></script>
+
+		<script>
+			var csrftoken = Cookies.get('csrftoken');
+			function csrfSafeMethod(method) {
+				// these HTTP methods don't require CSRF protection
+				return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+			}
+			$.ajaxSetup({
+				beforeSend: function(xhr, settings) {
+					if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+						xhr.setRequestHeader("X-CSRFToken", csrftoken);
+					}
+				}
+			});
+				{% block domready %}
+				{% endblock domready %}
+		</script>		
+  </body>
+</html>
